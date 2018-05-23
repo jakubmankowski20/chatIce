@@ -1,0 +1,11 @@
+c++ -I. -I$ICE_HOME/include -c Chat.cpp Server.cpp Impl/ServerImpl.cpp Impl/RoomImpl.cpp Impl/UserImpl.cpp
+c++ -o server Chat.o Server.o ServerImpl.o RoomImpl.o UserImpl.o -L$ICE_HOME/lib -lIce -lIceUtil -pthread
+./server
+
+c++ -I. -I$ICE_HOME/include -c Chat.cpp Client.cpp Impl/UserImpl.cpp
+c++ -o client Chat.o Client.o UserImpl.o -L$ICE_HOME/lib -lIce -lIceUtil -pthread
+./client
+
+
+
+
