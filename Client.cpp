@@ -143,6 +143,18 @@ public:
             cout << "Cannot send message - user does not exists!" << endl;
         }
     }
+    void listUsers(){
+        if(roomPrx){
+            UserList userList = roomPrx->getUsers();
+            cout << "Users in room: " << endl;
+            for(UserList::iterator it = userList.begin(); it != userList.end(); ++it) {
+                cout << (*it)->getName() << endl;
+            }            
+        }
+        else{
+            cout << "You are not in the room" << endl;
+        }
+    }
     void leave(){
         RoomPrx leaveRoomPrx;
         if(roomPrx){
@@ -290,6 +302,17 @@ main(int argc, char* argv[])
 
             if(key == "/leave"){
                 client.leave();
+                continue;
+            }
+            if(key == "/users")
+            {
+                if(client.isRoom()){
+                    client.listUsers();
+                    
+                }          
+                else{
+                    cout << "You have to join to the room to list users" << endl;
+                }
                 continue;
             }
 
